@@ -66,6 +66,34 @@ const player1 = new Player({
         hit: {
             imageSrc: './images/wizard/Take hit.png',
             framesMax: 3,
+        },
+        idle1: {
+            imageSrc: './images/wizard1/Idle.png',
+            framesMax: 4,
+        },
+        run1: {
+            imageSrc: './images/wizard1/Run.png',
+            framesMax: 8,
+        },
+        jump1: {
+            imageSrc: './images/wizard1/Jump.png',
+            framesMax: 2,
+        },
+        fall1: {
+            imageSrc: './images/wizard1/Fall.png',
+            framesMax: 2,
+        },
+        attack1: {
+            imageSrc: './images/wizard1/Attack1.png',
+            framesMax: 4,
+        },
+        dead1: {
+            imageSrc: './images/wizard1/Death.png',
+            framesMax: 7,
+        },
+        hit1: {
+            imageSrc: './images/wizard1/Take hit.png',
+            framesMax: 3,
         }
     }
 })
@@ -73,8 +101,8 @@ const player1 = new Player({
 
 const player2 = new Player({
     position: {
-        x: 400,
-        y: 200
+        x: window.innerWidth - 200,
+        y: 0
     },
     velocity: {
         x: 0,
@@ -114,6 +142,34 @@ const player2 = new Player({
         },
         hit: {
             imageSrc: './images/warrior/Take Hit - white silhouette.png',
+            framesMax: 4,
+        },
+        idle1: {
+            imageSrc: './images/warrior1/Idle.png',
+            framesMax: 8,
+        },
+        run1: {
+            imageSrc: './images/warrior1/Run.png',
+            framesMax: 8,
+        },
+        jump1: {
+            imageSrc: './images/warrior1/Jump.png',
+            framesMax: 2,
+        },
+        fall1: {
+            imageSrc: './images/warrior1/Fall.png',
+            framesMax: 2,
+        },
+        attack1: {
+            imageSrc: './images/warrior1/Attack1.png',
+            framesMax: 6,
+        },
+        dead1: {
+            imageSrc: './images/warrior1/Death.png',
+            framesMax: 6,
+        },
+        hit1: {
+            imageSrc: './images/warrior1/Take Hit - white silhouette.png',
             framesMax: 4,
         }
     }
@@ -164,35 +220,65 @@ function animate() {
     player1.velocity.x = 0
     if (keys.a.pressed && player1.lastKey === 'a') {
         player1.velocity.x = -5;
-        player1.switchAnimation('run')
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player1.switchAnimation('run1')
+        } else
+            player1.switchAnimation('run')
     } else if (keys.d.pressed && player1.lastKey === 'd') {
         player1.velocity.x = 5;
-        player1.switchAnimation('run')
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player1.switchAnimation('run1')
+        } else
+            player1.switchAnimation('run')
     } else {
-        player1.switchAnimation('idle')
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player1.switchAnimation('idle1')
+        } else
+            player1.switchAnimation('idle')
     }
 
     if (player1.velocity.y < 0) {
-        player1.switchAnimation('jump')
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player1.switchAnimation('jump1')
+        } else
+            player1.switchAnimation('jump')
     } else if (player1.velocity.y > 0) {
-        player1.switchAnimation('fall')
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player1.switchAnimation('fall1')
+        } else
+            player1.switchAnimation('fall')
     }
 
     player2.velocity.x = 0
     if (keys.ArrowLeft.pressed && player2.lastKey === 'ArrowLeft') {
         player2.velocity.x = -5;
-        player2.switchAnimation('run')
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player2.switchAnimation('run1')
+        }
+        else player2.switchAnimation('run')
     } else if (keys.ArrowRight.pressed && player2.lastKey === 'ArrowRight') {
         player2.velocity.x = 5;
-        player2.switchAnimation('run')
-    }else {
-        player2.switchAnimation('idle')
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player2.switchAnimation('run1')
+        }
+        else player2.switchAnimation('run')
+    } else {
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player2.switchAnimation('idle1')
+        } else
+            player2.switchAnimation('idle')
     }
 
     if (player2.velocity.y < 0) {
-        player2.switchAnimation('jump')
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player2.switchAnimation('jump1')
+        } else
+            player2.switchAnimation('jump')
     } else if (player2.velocity.y > 0) {
-        player2.switchAnimation('fall')
+        if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+            player2.switchAnimation('fall1')
+        } else
+            player2.switchAnimation('fall')
     }
 
 
@@ -224,7 +310,11 @@ window.addEventListener('keydown', (e) => {
         case 'w':
             player1.velocity.y = -20
             break
-        case ' ':
+        case 's':
+            if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+                player1.switchAnimation('attack1')
+            } else
+                player1.switchAnimation('attack')
             player1.attack()
             break
     }
@@ -242,6 +332,10 @@ window.addEventListener('keydown', (e) => {
             player2.velocity.y = -20
             break
         case 'ArrowDown':
+            if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+                player2.switchAnimation('attack1')
+            } else
+                player2.switchAnimation('attack')
             player2.attack()
             break
     }
