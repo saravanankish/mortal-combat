@@ -10,11 +10,54 @@
 <body>
     <div class="container">
         <div class="mask" id="mask"></div>
+        <div class="instructions-container hidden" id="instructions">
+            <div class="instruction-inner">
+                <div class="close-btn" id="close-btn">
+                </div>
+                <h1 style="text-align: center; margin-bottom: 20px;">Instructions</h1>
+                <div class="instruction-list">
+                    <h4 style=" margin-bottom: 10px;">Player 1 movement</h4>
+                    <div class="instruction-item">
+                        <img src="./images/w.png" width="50" alt="w-key"/>
+                        <p style="margin-left: 20px;">- Jump</p>
+                    </div>
+                    <div class="instruction-item">
+                        <img src="./images/a.png" width="50" alt="w-key"/>
+                        <p style="margin-left: 20px;">- Left movement</p>
+                    </div>
+                    <div class="instruction-item">
+                        <img src="./images/d.png" width="50" alt="w-key"/>
+                        <p style="margin-left: 20px;">- Right movement</p>
+                    </div>
+                    <div class="instruction-item" style="margin-bottom: 20px;">
+                        <img src="./images/s.png" width="50" alt="w-key"/>
+                        <p style="margin-left: 20px;">- Attack</p>
+                    </div>
+                    <h4 style="color: white; margin-bottom: 10px;">Player 2 movement</h4>
+                    <div class="instruction-item">
+                        <img src="./images/up.png" width="50" alt="w-key"/>
+                        <p style="margin-left: 20px;">- Jump</p>
+                    </div>
+                    <div class="instruction-item">
+                        <img src="./images/left.png" width="50" alt="w-key"/>
+                        <p style="margin-left: 20px;">- Left movement</p>
+                    </div>
+                    <div class="instruction-item">
+                        <img src="./images/right.png" width="50" alt="w-key"/>
+                        <p style="margin-left: 20px;">- Right movement</p>
+                    </div>
+                    <div class="instruction-item">
+                        <img src="./images/down.png" width="50" alt="w-key"/>
+                        <p style="margin-left: 20px;">- Attack</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="start-game-container" id="start-game">
             <h1>Mortal Combat</h1>
             <div class="buttons-container">
                 <button class="btn" onclick="startGame()">Start Game</button>
-                <button class="btn">How To Play?</button>
+                <button class="btn" onclick="openInstructions()">How To Play?</button>
             </div>
         </div>
         <div class="start-game-container result-container hidden" id="result-container">

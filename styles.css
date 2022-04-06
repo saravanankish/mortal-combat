@@ -129,3 +129,94 @@ body {
 .hidden {
     display: none;
 }
+
+.instructions-container {
+    position: absolute;
+    z-index: 13;
+    background-color: #818CF8;
+    width: 80vmin;
+    height: 90vmin;
+    left: 50%;
+    top: 50%;
+    overflow-y: auto;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+
+.instructions-container::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
+}
+
+.instructions-container::-webkit-scrollbar-thumb {
+    background: blueviolet;
+    border-radius: 200px;
+}
+
+.instruction-inner {
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 4vmin;
+    height: 4vmin;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-btn::after {
+    content: '';
+    width: 4vmin;
+    height: 3px;
+    display: block;
+    background-color: white;
+    transform: rotate(45deg);
+    top: 10px;
+    position: absolute;
+}
+
+.close-btn::before {
+    content: '';
+    width: 4vmin;
+    height: 3px;
+    display: block;
+    background-color: white;
+    transform: rotate(-45deg);
+    top: 10px;
+    position: absolute;
+}
+
+.close-btn:hover::after, .close-btn:hover::before {
+    background-color: red;
+}
+
+.instruction-inner {
+    color: white;
+}
+
+.instruction-inner h1 {
+    font-size: 5vmin;
+}
+
+.instruction-inner h4 {
+    font-size: 3vmin;
+}
+
+.instruction-inner p {
+    font-size: 2vmin;
+}
+
+.instruction-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 400px) {
+    .instructions-container {
+        max-height: 150vmin;
+    }
+}

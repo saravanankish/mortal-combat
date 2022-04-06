@@ -5,12 +5,12 @@ const width = window.innerWidth
 const height = window.innerHeight
 const gravity = 0.7
 const player1AttackBoxOffset = 150
-const GAME_TIME = 30
+const GAME_TIME = 60
 const healthBarContainer = document.getElementById('health-bar-container')
 let timerTimeout;
 let time = GAME_TIME
 let gameStarted = false;
-let listOfElementToHide = ['mask', 'start-game', 'result-container']
+let listOfElementToHide = ['mask', 'start-game', 'result-container', 'instructions']
 let background
 let player1
 let player2
@@ -20,9 +20,11 @@ canvas.height = window.innerHeight
 let timer = document.getElementById('timer');
 timer.innerText = time
 
-// window.onbeforeunload = () => {
-//     return 'Do you want to leave?'
-// }
+window.onbeforeunload = () => {
+    if (gameStarted) {
+        return 'Do you want to leave?'
+    }
+}
 
 
 function runTimer() {
@@ -138,7 +140,7 @@ function initGame() {
             }
         }
     })
-    
+
     player2 = new Player({
         position: {
             x: window.innerWidth - 200,
@@ -278,13 +280,13 @@ function animate() {
     }
 
     player1.velocity.x = 0
-    if (keys.a.pressed && player1.lastKey === 'a') {
+    if (keys.a.pressed && (player1.lastKey === 'a' || player1.lastKey === 'A')) {
         player1.velocity.x = -5;
         if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
             player1.switchAnimation('run1')
         } else
             player1.switchAnimation('run')
-    } else if (keys.d.pressed && player1.lastKey === 'd') {
+    } else if (keys.d.pressed && (player1.lastKey === 'd'|| player1.lastKey === 'D')) {
         player1.velocity.x = 5;
         if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
             player1.switchAnimation('run1')
@@ -416,14 +418,32 @@ window.addEventListener('keydown', (e) => {
                 keys.d.pressed = true;
                 player1.lastKey = e.key
                 break
+            case 'D':
+                keys.d.pressed = true;
+                player1.lastKey = e.key
+                break
             case 'a':
+                keys.a.pressed = true;
+                player1.lastKey = e.key
+                break
+            case 'A':
                 keys.a.pressed = true;
                 player1.lastKey = e.key
                 break
             case 'w':
                 player1.velocity.y = -20
                 break
+            case 'W':
+                player1.velocity.y = -20
+                break
             case 's':
+                if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
+                    player1.switchAnimation('attack1')
+                } else
+                    player1.switchAnimation('attack')
+                player1.attack()
+                break
+            case 'S':
                 if (player1.position.x + (player1.image.width / player1.framesMax) - 200 > player2.position.x) {
                     player1.switchAnimation('attack1')
                 } else
@@ -462,7 +482,13 @@ window.addEventListener('keyup', (e) => {
         case 'd':
             keys.d.pressed = false;
             break
+        case 'D':
+            keys.d.pressed = false;
+            break
         case 'a':
+            keys.a.pressed = false;
+            break
+        case 'A':
             keys.a.pressed = false;
             break
         case 'ArrowLeft':
@@ -515,5 +541,15 @@ function goToMenu() {
     player2.health = 100
     document.getElementById('start-game').style.display = 'block'
 }
+
+function openInstructions() {
+    document.getElementById('instructions').style.display = 'block'
+}
+
+function closeInstructions() {
+    document.getElementById('instructions').style.display = 'none'
+}
+
+document.getElementById('close-btn').addEventListener('click', closeInstructions)
 
 animate()
