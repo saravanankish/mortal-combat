@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+
 * {
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
 }
 
 body {
@@ -9,4 +13,119 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    position: relative;
+}
+
+.health-bar-container {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    top: 10px;
+    padding: 0px 20px;
+}
+
+.health-bar {
+    background-color: #ff000083;
+    height: 30px;
+    width: 100%;
+    border: 2px solid white;
+    position: relative;
+    transition: width 1s ease;
+}
+
+#health-bar-1 {
+    border-right: none;
+}
+
+#health-bar-2 {
+    border-left: none;
+}
+
+#health-bar-1:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #818CF8;
+}
+
+#health-bar-2:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #818CF8;
+}
+
+#timer {
+    background-color: black;
+    width: 100px;
+    height: 50px;
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    border: 2px solid white;
+}
+
+.start-game-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vmin;
+    min-height: 50vmin;
+    background-color:#818CF8;
+    box-shadow: 5px 5px 10px 0 #111;
+    text-align: center;
+    padding: 30px 10px;
+    color: white;
+    z-index: 12;
+    border-radius: 5px;
+    border: 3px solid white;
+}
+
+.mask {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.btn {
+    width: 30vmin;
+    margin: 20px 0px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.result-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 11;
+}
+
+.hidden {
+    display: none;
 }

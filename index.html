@@ -8,7 +8,31 @@
     <title>Mortal combat</title>
 </head>
 <body>
-    <canvas id="myCanvas"></canvas>   
+    <div class="container">
+        <div class="mask" id="mask"></div>
+        <div class="start-game-container" id="start-game">
+            <h1>Mortal Combat</h1>
+            <div class="buttons-container">
+                <button class="btn" onclick="startGame()">Start Game</button>
+                <button class="btn">How To Play?</button>
+            </div>
+        </div>
+        <div class="start-game-container result-container hidden" id="result-container">
+            <h1 id="results">Player 1 Wins</h1>
+            <div class="buttons-container">
+                <button class="btn" onclick="goToMenu()">Menu</button>
+            </div>
+        </div>
+        <div class="health-bar-container" id="health-bar-container">
+            <div id="health-bar-1" class="health-bar"></div>
+            <div id="timer">60</div>
+            <div id="health-bar-2" class="health-bar"></div>
+        </div>
+        <canvas id="myCanvas"></canvas>   
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/plugins/CSSRulePlugin.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.2/gsap.min.js"></script>
     <script src="./js/Sprite.js"></script> 
     <script src="./js/Player.js"></script> 
     <script src="./js/index.js"></script> 
